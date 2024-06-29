@@ -7,7 +7,7 @@ import * as Yup from "yup";
 
 function Registration() {
   const location = useLocation();
-  const dataToEdit = location.state?.dataToEdit
+  const dataToEdit = location.state?.dataToEdit;
 
   const validationSchema = Yup.object().shape({
     fullName: Yup.string().required('Full Name is required'),
@@ -15,12 +15,6 @@ function Registration() {
     password: Yup.string().min(8, 'Password must be 8 digit').required('Password is required'),
     confirmPassword: Yup.string().oneOf([Yup.ref('password'), null], 'Password must match').required('Confirm password is required'),
   });
-
-  useEffect(() => {
-    if (dataToEdit) {
-      Formik.setValues(dataToEdit.formData)
-    }
-  }, [dataToEdit]);
 
   return (
     <>
@@ -56,52 +50,60 @@ function Registration() {
                 alert('Data is going to send to the localstorage');
               }}
             >
-              {({ errors, touched, isSubmitting }) => (
-                <Form>
-                  <div>
-                    <Field
-                      name='fullName'
-                      type='text'
-                      className={`form-control py-2 rounded-4 mb-3 center-input w-75 ${touched.fullName && errors.fullName ? 'error-input w-75' : ''}`}
-                      placeholder='fullName'
-                    />
-                    <ErrorMessage name="fullName" component="div" className='error-message' />
-                  </div>
+              {({ errors, touched, isSubmitting, setValues }) => {
+                useEffect(() => {
+                  if (dataToEdit) {
+                    setValues(dataToEdit.formData);
+                  }
+                }, [dataToEdit, setValues]);
 
-                  <div>
-                    <Field
-                      name='email'
-                      type='email'
-                      className={`form-control py-2 rounded-4 mb-3 center-input w-75${touched.email && errors.email ? 'error-input w-75' : ''}`}
-                      placeholder='Enter your email'
-                    />
-                    <ErrorMessage name="email" component="div" className='error-message ' />
-                  </div>
-                  <div>
-                    <Field
-                      name="password"
-                      type="password"
-                      className={`form-control py-2 rounded-4 mb-3 center-input w-75 ${touched.password && errors.password ? 'error-input w-75' : ''}`}
-                      placeholder="Enter password"
-                    />
-                    <ErrorMessage name="password" component="div" className="error-message" />
-                  </div>
-                  <div>
-                    <Field
-                      name="confirmPassword"
-                      type="password"
-                      className={`form-control py-2 rounded-4 mb-3 center-input w-75 ${touched.confirmPassword && errors.confirmPassword ? 'error-input' : ''}`}
-                      placeholder="Confirm password"
-                    />
-                    <ErrorMessage name="confirmPassword" component="div" className="error-message" />
-                  </div>
-                  <button type='submit' className="btn mybtn mt-3" disabled={isSubmitting}>
-                    Get Start &rarr;
-                  </button>
-                </Form>
-              )}
+                return (
+                  <Form>
+                    <div>
+                      <Field
+                        name='fullName'
+                        type='text'
+                        className={`form-control py-2 rounded-4 mb-3 center-input w-75 ${touched.fullName && errors.fullName ? 'error-input w-75' : ''}`}
+                        placeholder='fullName'
+                      />
+                      <ErrorMessage name="fullName" component="div" className='error-message' />
+                    </div>
+
+                    <div>
+                      <Field
+                        name='email'
+                        type='email'
+                        className={`form-control py-2 rounded-4 mb-3 center-input w-75${touched.email && errors.email ? 'error-input w-75' : ''}`}
+                        placeholder='Enter your email'
+                      />
+                      <ErrorMessage name="email" component="div" className='error-message ' />
+                    </div>
+                    <div>
+                      <Field
+                        name="password"
+                        type="password"
+                        className={`form-control py-2 rounded-4 mb-3 center-input w-75 ${touched.password && errors.password ? 'error-input w-75' : ''}`}
+                        placeholder="Enter password"
+                      />
+                      <ErrorMessage name="password" component="div" className="error-message" />
+                    </div>
+                    <div>
+                      <Field
+                        name="confirmPassword"
+                        type="password"
+                        className={`form-control py-2 rounded-4 mb-3 center-input w-75 ${touched.confirmPassword && errors.confirmPassword ? 'error-input' : ''}`}
+                        placeholder="Confirm password"
+                      />
+                      <ErrorMessage name="confirmPassword" component="div" className="error-message" />
+                    </div>
+                    <button type='submit' className="btn mybtn mt-3" disabled={isSubmitting}>
+                      Get Start &rarr;
+                    </button>
+                  </Form>
+                );
+              }}
             </Formik>
-            <p className='mt-3'>Already have an account ? <Link><button className='btn'><span style={{ color: 'red' }}>signin</span></button></Link></p>
+            <p className='mt-3'>Already have an account ? <Link to='/login'><button className='btn'><span style={{ color: 'red' }}>signin</span></button></Link></p>
           </div>
         </div >
       </div >

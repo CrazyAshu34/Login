@@ -8,12 +8,12 @@ function Element() {
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Container fluid className='px-0 d-flex justify-content-center'>
           <Navbar.Collapse id="basic-navbar-nav">
-            <Navbar.Brand as={Link} to="/" className='ps-5'>Ashutosh singh</Navbar.Brand>
+            <Navbar.Brand as={Link} to="/" className='ps-5'>Ashutosh Singh</Navbar.Brand>
             <Nav className="mx-auto text-white pe-5">
               <Nav.Link as={Link} to="/">Home</Nav.Link>
-              <Nav.Link as={Link} to="/registration">registration</Nav.Link>
+              <Nav.Link as={Link} to="/registration">Registration</Nav.Link>
               <Nav.Link as={Link} to="/login">Login</Nav.Link>
-              <Nav.Link as={Link} to="/todolist">Todolist</Nav.Link>
+              <Nav.Link as={Link} to="/todolist">Todo_list</Nav.Link>
             </Nav>
           </Navbar.Collapse>
         </Container>

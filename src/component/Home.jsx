@@ -1,10 +1,10 @@
 import React from 'react';
-import todolist from "../assets/todolist.png";
+import todolist from "../assets/people.jpg";
 import "./Home.css"
 import { Link } from 'react-router-dom';
 const Home = () => {
   return (
-    <div className="container-fluid">
+    <div className="container-fluid mt-5 pt-3">
       <div className="row justify-content-center align-items-center">
         {/* First column */}
         <div className="col-lg-6 col-sm-12 d-flex justify-content-center"> {/* Added d-flex and justify-content-center */}
@@ -19,7 +19,7 @@ const Home = () => {
         {/* Second column */}
         <div className="col-lg-6 col-sm-12 p-0 ">
           <div className="div bg-color-white">
-            <img className="hero_img" src={todolist} alt="" />
+            <img className="hero_img" src={todolist} alt="" style={{ background: 'transparent', mixBlendMode: 'multiply' }} />
           </div>
         </div>
       </div>

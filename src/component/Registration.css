@@ -1,3 +1,8 @@
+.congrats {
+    background-image: url('/src/assets/congrats.jpg');
+    width: 100%;
+    background-size: cover;
+}
 
 input::placeholder {
     font-size: 14px;
