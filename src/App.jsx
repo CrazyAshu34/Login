@@ -6,6 +6,7 @@ import Registration from "./component/Registration"
 import Login from './component/Login';
 import Todolist from './component/Todolist';
 import Home from './component/Home';
+import Company from './component/Company';
 
 const App = () => {
   // console.log(`EVERTHING IS GOOD`)
@@ -18,6 +19,7 @@ const App = () => {
         <Route path='/registration' element={<Registration />} />
         <Route path='/login' element={<Login />} />
         <Route path='/todolist' element={<Todolist />} />
+        <Route path='/company' element={<Company />} />
       </Routes>
     </>
   );
