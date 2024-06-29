@@ -2,58 +2,63 @@ import React, { useEffect, useState } from 'react';
 import people from "../assets/people.jpg";
 import "./Registration.css";
 import { Link, useLocation } from 'react-router-dom';
-
+import { Formik, Field, Form, ErrorMessage } from 'formik';
+import * as Yup from "yup";
 
 function Registration() {
   const location = useLocation();
   const dataToEdit = location.state?.dataToEdit
 
-  //regex for all 
+  // const [formData, setFormData] = useState({ // updating the value using the [name] attribute; 
+  //   fullName: '',
+  //   email: '',
+  //   password: '',
+  //   confirmPassword: '',
+  // })
 
-
-  const [formData, setFormData] = useState({ // updating the value using the [name] attribute; 
-    fullName: '',
-    email: '',
-    password: '',
-    confirmPassword: '',
-  })
-
-  //handle change
-  function handleChange(e) {
-    const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value })
-  }
-
-  //handle delete
-  function handleSubmit(e) {
-    e.preventDefault();
-
-
-    const timeStamp = dataToEdit ? dataToEdit.id : new Date().getTime();
-
-    const existingData = JSON.parse(localStorage.getItem('storedDataOnLocal')) || [];
-
-    const updatedData = dataToEdit
-      ? existingData.map(item => item.id === timeStamp ? { id: timeStamp, formData } : item)
-      : [...existingData, { id: timeStamp, formData }];
-
-    localStorage.setItem('storedDataOnLocal', JSON.stringify(updatedData));
-
-    setFormData({
-      fullName: '',
-      email: '',
-      password: '',
-      confirmPassword: '',
-    });
-    alert('Data is going to send to the localstorage')
-  }
+  const validationSchema = Yup.object().shape({
+    fullName: Yup.string().required('Full Name is required'),
+    email: Yup.string().email('Invalid email').required('Email is required'),
+    password: Yup.string().min(8, 'Password must be 8 digit').required('Password is required'),
+    confirmPassword: Yup.string().oneOf([Yup.ref('password'), null], 'Password must match').required('Confirm password is required'),
+  });
 
   useEffect(() => {
     if (dataToEdit) {
-      setFormData(dataToEdit.formData)
+      formik.setValues(dataToEdit.formData)
     }
   }, [dataToEdit])
 
+
+  // //handle change
+  // function handleChange(e) {
+  //   const { name, value } = e.target;
+  //   setFormData({ ...formData, [name]: value })
+  // }
+
+  // //handle delete
+  // function handleSubmit(e) {
+  //   e.preventDefault();
+
+
+  //   const timeStamp = dataToEdit ? dataToEdit.id : new Date().getTime();
+
+  //   const existingData = JSON.parse(localStorage.getItem('storedDataOnLocal')) || [];
+
+  //   const updatedData = dataToEdit
+  //     ? existingData.map(item => item.id === timeStamp ? { id: timeStamp, formData } : item)
+  //     : [...existingData, { id: timeStamp, formData }];
+
+  //   localStorage.setItem('storedDataOnLocal', JSON.stringify(updatedData));
+
+  //   setFormData({
+  //     fullName: '',
+  //     email: '',
+  //     password: '',
+  //     confirmPassword: '',
+  //   });
+  //   alert('Data is going to send to the localstorage')
+  // }
 
   return (
     <>
@@ -68,7 +73,9 @@ function Registration() {
           {/* Second column */}
           <div className="col-lg-6 col-sm-12 text-center">
             <p className='fs-4 mb-5'>Let's help you meet your tasks</p>
-            <form onSubmit={handleSubmit}>
+           <Formik
+           
+           >
 
               <input
                 onChange={handleChange}
