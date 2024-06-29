@@ -40,10 +40,10 @@ function Todolist() {
           {formDataList.map((item, index) => (
             <tr key={index}>
               <td>{item.id}</td>
-              <td>{item.formData.fullName}</td>
-              <td>{item.formData.email}</td>
-              <td>{item.formData.password}</td>
-              <td>{item.formData.confirmPassword}</td>
+              <td>{item.fullName}</td>
+              <td>{item.email}</td>
+              <td>{item.password}</td>
+              <td>{item.confirmPassword}</td>
               <td><button onClick={() => handleDelete(item.id)} className='btn btn-danger'>Delete</button></td>
               <td><button onClick={() => handleEdit(item.id)} className='btn btn-success'>Edit</button></td>
             </tr>

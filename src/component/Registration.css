@@ -25,6 +25,17 @@ input {
     color: white;
 }
 
+/* input box error */
+.error-input {
+    border-color: red !important;
+}
+
+.error-message {
+    color: red !important;
+    text-align: start;
+    margin-top: -0.8rem;
+    padding-left: 5.5rem;
+}
 
 @media screen and (max-width: 400px) {
 
